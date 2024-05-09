@@ -36,8 +36,8 @@ switch ($_POST['proses']) {
         $stmt->execute([$id_pasien]);
         break;
     default:
-        header('location: ./data_unit_kerja.php');
+        header('location: ../data_unit_kerja.php');
 }
 
 // Redirect ke halaman data unit kerja
-header('location: ./data_unit_kerja.php');
+header('location: ../data_unit_kerja.php');

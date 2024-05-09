@@ -1,6 +1,6 @@
 <?php
-
-require_once './db_koneksi.php';
+session_start();
+require_once './action/db_koneksi.php';
 
 $kategori = ["Dokter", "Perawat", "Administrasi"];
 
@@ -52,7 +52,7 @@ require_once './layouts/sidebar.php';
         </div>
       </div>
       <div class="card-body">
-        <form method="post" action="proses_paramedik.php">
+        <form method="post" action="./action/proses_paramedik.php">
           <?php if (!empty($id)) : ?>
             <input type="hidden" name="id_pasien" value="<?= $id; ?>">
           <?php endif;  ?>
@@ -94,7 +94,7 @@ require_once './layouts/sidebar.php';
               <select id="kategori" name="kategori" class="custom-select">
                 <option value="" disabled selected>--- Pilih Kategori ---</option>
                 <?php foreach ($kategori as $k) : ?>
-                  <option value="<?= $k ?>"><?= $k ?></option>
+                  <option <?= ($id && $paramedik['kategori'] == $k ? 'selected' : '') ?? '' ?> value="<?= $k ?>"><?= $k ?></option>
                 <?php endforeach ?>
               </select>
             </div>
@@ -117,7 +117,7 @@ require_once './layouts/sidebar.php';
               <select id="unit_kerja" name="unit_kerja" class="custom-select">
                 <option value="" disabled selected>--- Pilih Unit Kerja ---</option>
                 <?php foreach ($data_unit_kerja as $key => $unit_kerja) : ?>
-                  <option <?= $id && $paramedik['unit_kerja_id'] == $unit_kerja['id'] ? 'selected' : '' ?> value="<?= $unit_kerja['id'] ?>"><?= $unit_kerja['nama'] ?></option>
+                  <option <?= ($id && $paramedik['unit_kerja_id'] == $unit_kerja['id'] ? 'selected' : '') ?? '' ?> value="<?= $unit_kerja['id'] ?>"><?= $unit_kerja['nama'] ?></option>
                 <?php endforeach ?>
               </select>
             </div>

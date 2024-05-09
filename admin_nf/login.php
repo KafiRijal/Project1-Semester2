@@ -1,17 +1,9 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+session_start();
 
-    if (trim($email) == '' || trim($password) == '') {
-        echo 'Input form harus diisi';
-    }else {
-        if ($email == 'admin@gmail.com' && $password == 'admin123') {
-            header('location: ./index.php');
-        }else {
-            echo 'Email atau Password salah';
-        }
-    }
+// cek apakah sudah login? kalau sudah arahin ke halaman dashboard
+if(isset($_SESSION['login']) && $_SESSION['login'] == true) {
+  header('location: ./');
 }
 ?>
 
@@ -41,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="" method="post">
+      <form action="./action/proses_login.php" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" placeholder="admin@gmail.com">
           <div class="input-group-append">

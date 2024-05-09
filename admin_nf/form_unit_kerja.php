@@ -1,6 +1,6 @@
 <?php
-
-require_once './db_koneksi.php';
+session_start();
+require_once './action/db_koneksi.php';
 
 $id = $_GET['id'] ?? 0;
 if ($id) {
@@ -46,7 +46,7 @@ require_once './layouts/sidebar.php';
         </div>
       </div>
       <div class="card-body">
-        <form method="post" action="proses_unit_kerja.php">
+        <form method="post" action="./action/proses_unit_kerja.php">
           <?php if (!empty($id)) :?>
               <input type="hidden" name="id_pasien" value="<?= $id; ?>">
           <?php endif;  ?>

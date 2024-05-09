@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 10:13 AM
+-- Generation Time: May 09, 2024 at 06:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,7 +69,8 @@ CREATE TABLE `paramedik` (
 INSERT INTO `paramedik` (`id`, `nama`, `gender`, `tmp_lahir`, `tgl_lahir`, `kategori`, `telpon`, `alamat`, `unit_kerja_id`) VALUES
 (4, 'kafi rijal', 'L', 'Bandung', '2024-04-28', 'Dokter', '085156629197', 'Disana', 6),
 (5, 'Takbir', 'L', 'Indramayu', '2024-04-28', 'Perawat', '085156629197', 'Disini', 7),
-(6, 'Daffa', 'L', 'Depok', '2024-04-28', 'Administrasi', '085156629197', 'Disitu', 8);
+(6, 'Daffa', 'L', 'Depok', '2024-04-28', 'Administrasi', '085156629197', 'Disitu', 8),
+(7, 'Jono', 'L', 'Bogor', '2024-05-09', 'Dokter', '085156629197', 'Jalan RTM', 6);
 
 -- --------------------------------------------------------
 
@@ -94,11 +95,11 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`id`, `kode`, `nama`, `tmp_lahir`, `tgl_lahir`, `gender`, `email`, `alamat`, `kelurahan_id`) VALUES
-(1, 'P001', 'Kafi Rijal', '', '0000-00-00', 'L', 'kafi@gmail.com', 'Jalan Lapangan Member', 1),
-(2, 'P002', 'Kapoy', NULL, NULL, 'L', 'kapoy@gmail.com', 'Jalan Kampung Sidamukti', 5),
-(3, 'P003', 'Nayanika', NULL, NULL, 'P', 'nayanika@gmail.com', 'Jalan Bogol', 5),
-(4, 'P004', 'Zoya', NULL, NULL, 'P', 'zoya@gmail.com', 'Jalan Tanjung Pinang', 3),
-(5, 'P005', 'Daffa', NULL, NULL, 'L', 'daffa@gmail.com', 'Jalan Pondok', 1);
+(1, 'P001', 'Kafi Rijal', 'Bandung', '2024-05-09', 'L', 'kafi@gmail.com', 'Jalan Lapangan Member', 1),
+(2, 'P002', 'Kapoy', 'Depok', '2024-05-09', 'L', 'kapoy@gmail.com', 'Jalan Kampung Sidamukti', 5),
+(3, 'P003', 'Nayanika', 'Bogor', '2024-05-09', 'P', 'nayanika@gmail.com', 'Jalan Bogol', 5),
+(4, 'P004', 'Zoya', 'Medan', '2024-05-09', 'P', 'zoya@gmail.com', 'Jalan Tanjung Pinang', 3),
+(5, 'P005', 'Daffa', 'Depok', '2024-05-09', 'L', 'daffa@gmail.com', 'Jalan Pondok', 1);
 
 -- --------------------------------------------------------
 
@@ -144,6 +145,27 @@ INSERT INTO `unit_kerja` (`id`, `nama`) VALUES
 (7, 'Keperawatan'),
 (8, 'Administrasi');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
+(1, 'admin nf', 'admin@gmail.com', 'admin123'),
+(2, 'operator', 'operator@gmail.com', 'operator123');
+
 --
 -- Indexes for dumped tables
 --
@@ -184,6 +206,12 @@ ALTER TABLE `unit_kerja`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -197,7 +225,7 @@ ALTER TABLE `kelurahan`
 -- AUTO_INCREMENT for table `paramedik`
 --
 ALTER TABLE `paramedik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -216,6 +244,12 @@ ALTER TABLE `periksa`
 --
 ALTER TABLE `unit_kerja`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

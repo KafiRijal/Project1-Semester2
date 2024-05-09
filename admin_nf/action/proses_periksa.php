@@ -42,8 +42,8 @@ switch ($_POST['proses']) {
         $stmt->execute([$id_pasien]);
         break;
     default:
-        header('location: ./data_periksa.php');
+        header('location: ../data_periksa.php');
 }
 
 // Redirect ke halaman data periksa
-header('location: ./data_periksa.php');
+header('location: ../data_periksa.php');

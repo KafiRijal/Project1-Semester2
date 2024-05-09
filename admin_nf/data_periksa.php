@@ -1,14 +1,18 @@
 <?php
+session_start();
+require_once './action/db_koneksi.php';
+
+// Perintah untuk mengambil data dari table pasien
+$sql = "SELECT periksa.*, pasien.nama AS nama_pasien, paramedik.nama AS nama_dokter 
+FROM periksa 
+JOIN pasien ON periksa.pasien_id = pasien.id 
+JOIN paramedik ON periksa.dokter_id = paramedik.id";
+// Jalanin query
+$getPeriksa = $dbh->query($sql);
+
 require_once './layouts/top.php';
 require_once './layouts/navbar.php';
 require_once './layouts/sidebar.php';
-
-require_once './db_koneksi.php';
-
-// Perintah untuk mengambil data dari table pasien
-$sql = 'SELECT * FROM pasien';
-// Jalanin query
-$getPasien = $dbh->query($sql);
 
 ?>
 
@@ -19,7 +23,7 @@ $getPasien = $dbh->query($sql);
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Pasien</h1>
+          <h1>Periksa</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -31,7 +35,7 @@ $getPasien = $dbh->query($sql);
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Data Pasien</h3>
+        <h3 class="card-title">Data Periksa</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -47,25 +51,31 @@ $getPasien = $dbh->query($sql);
           <thead>
             <tr>
               <th>No</th>
-              <th>Kode</th>
-              <th>Nama Pasien</th>
-              <th>Alamat</th>
-              <th>Email</th>
+              <th>Tanggal</th>
+              <th>Berat</th>
+              <th>Tinggi</th>
+              <th>Tensi</th>
+              <th>Keterangan</th>
+              <th>Pasien</th>
+              <th>Dokter</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($getPasien as $key => $pasien) : ?>
+            <?php foreach ($getPeriksa as $key => $periksa) : ?>
               <tr>
                 <td><?= ++$key ?></td>
-                <td><?= $pasien['kode'] ?></td>
-                <td><?= $pasien['nama'] ?></td>
-                <td><?= $pasien['alamat'] ?></td>
-                <td><?= $pasien['email'] ?></td>
+                <td><?= $periksa['tanggal'] ?></td>
+                <td><?= $periksa['berat'] ?></td>
+                <td><?= $periksa['tinggi'] ?></td>
+                <td><?= $periksa['tensi'] ?></td>
+                <td><?= $periksa['keterangan'] ?></td>
+                <td><?= $periksa['nama_pasien'] ?></td>
+                <td><?= $periksa['nama_dokter'] ?></td>
                 <td>
-                  <a href="./form_pasien.php?id=<?= $pasien['id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
-                  <form action="proses_pasien.php" method="post">
-                    <input type="hidden" name="id_pasien" value="<?= $pasien['id'] ?>">
+                  <a href="./form_periksa.php?id=<?= $periksa['id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
+                  <form action="./action/proses_periksa.php" method="post">
+                    <input type="hidden" name="id_pasien" value="<?= $periksa['id'] ?>">
                     <input type="submit" name="proses" class="btn btn-sm btn-danger" value="Hapus">
                   </form>
                 </td>

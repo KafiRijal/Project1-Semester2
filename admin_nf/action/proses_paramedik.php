@@ -43,8 +43,8 @@ switch ($_POST['proses']) {
         $stmt->execute([$id_pasien]);
         break;
     default:
-        header('location: ./data_paramedik.php');
+        header('location: ../data_paramedik.php');
 }
 
 // Redirect ke halaman data paramedik
-header('location: ./data_paramedik.php');
+header('location: ../data_paramedik.php');

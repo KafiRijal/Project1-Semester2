@@ -1,6 +1,6 @@
 <?php
-
-require_once './db_koneksi.php';
+session_start();
+require_once './action/db_koneksi.php';
 
 $data_kelurahan = $dbh->query("SELECT * FROM kelurahan ORDER BY nama ASC");
 
@@ -50,7 +50,7 @@ require_once './layouts/sidebar.php';
         </div>
       </div>
       <div class="card-body">
-        <form method="post" action="proses_pasien.php">
+        <form method="post" action="./action/proses_pasien.php">
           <?php if (!empty($pasien_id)) :?>
               <input type="hidden" name="id_pasien" value="<?= $pasien_id; ?>">
           <?php endif;  ?>
@@ -105,7 +105,7 @@ require_once './layouts/sidebar.php';
               <select id="kelurahan" name="kelurahan" class="custom-select">
                 <option value="" disabled selected>--- Pilih Kelurahan ---</option>
                 <?php foreach ($data_kelurahan as $key => $kelurahan) : ?>
-                  <option <?= $pasien_id && $pasien['kelurahan_id'] == $kelurahan['id'] ? 'selected' : '' ?> value="<?= $kelurahan['id'] ?>"><?= $kelurahan['nama'] ?></option>
+                  <option <?= ($pasien_id && $pasien['kelurahan_id'] == $kelurahan['id'] ? 'selected' : '') ?? '' ?> value="<?= $kelurahan['id'] ?>"><?= $kelurahan['nama'] ?></option>
                 <?php endforeach ?>
               </select>
             </div>

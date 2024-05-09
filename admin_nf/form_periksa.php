@@ -1,6 +1,6 @@
 <?php
-
-require_once './db_koneksi.php';
+session_start();
+require_once './action/db_koneksi.php';
 
 $data_pasien = $dbh->query("SELECT * FROM pasien ORDER BY nama ASC");
 
@@ -54,7 +54,7 @@ require_once './layouts/sidebar.php';
         </div>
       </div>
       <div class="card-body">
-        <form method="post" action="proses_periksa.php">
+        <form method="post" action="./action/proses_periksa.php">
           <?php if (!empty($id)) : ?>
             <input type="hidden" name="id_pasien" value="<?= $id; ?>">
           <?php endif;  ?>
@@ -95,7 +95,7 @@ require_once './layouts/sidebar.php';
               <select id="pasien" name="pasien" class="custom-select">
                 <option value="" disabled selected>--- Pilih Pasien ---</option>
                 <?php foreach ($data_pasien as $key => $pasien) : ?>
-                  <option <?= $id && $periksa['pasien_id'] == $pasien['id'] ? 'selected' : '' ?> value="<?= $pasien['id'] ?>"><?= $pasien['nama'] ?></option>
+                  <option <?= ($id && $periksa['pasien_id'] == $pasien['id'] ? 'selected' : '') ?? '' ?> value="<?= $pasien['id'] ?>"><?= $pasien['nama'] ?></option>
                 <?php endforeach ?>
               </select>
             </div>
@@ -106,7 +106,7 @@ require_once './layouts/sidebar.php';
               <select id="dokter" name="dokter" class="custom-select">
                 <option value="" disabled selected>--- Pilih Dokter ---</option>
                 <?php foreach ($data_dokter as $key => $dokter) : ?>
-                  <option <?= $id && $periksa['dokter_id'] == $dokter['id'] ? 'selected' : '' ?> value="<?= $dokter['id'] ?>"><?= $dokter['nama'] ?></option>
+                  <option <?= ($id && $periksa['dokter_id'] == $dokter['id'] ? 'selected' : '') ?? '' ?> value="<?= $dokter['id'] ?>"><?= $dokter['nama'] ?></option>
                 <?php endforeach ?>
               </select>
             </div>

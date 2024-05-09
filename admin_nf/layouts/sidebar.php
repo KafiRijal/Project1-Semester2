@@ -14,7 +14,7 @@
           <img src="./dist/img/FotoDiri.jpeg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Kafi Rijal Rabbani Sopian</a>
+          <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
         </div>
       </div>
 

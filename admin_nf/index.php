@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// cek apakah usernya punya sesi login atau tidak?
+if($_SESSION['login'] == false) {
+  header('location: ./login.php');
+}
+
+
 require_once './layouts/top.php';
 require_once './layouts/navbar.php';
 require_once './layouts/sidebar.php';
@@ -11,12 +19,12 @@ require_once './layouts/sidebar.php';
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Blank Page</h1>
+            <h1>Admin NF</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li>
+              <li class="breadcrumb-item active">Admin NF</li>
             </ol>
           </div>
         </div>

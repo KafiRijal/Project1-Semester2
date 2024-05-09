@@ -1,14 +1,15 @@
 <?php
+session_start();
+require_once './action/db_koneksi.php';
+
+// Perintah untuk mengambil data dari table pasien
+$sql = "SELECT paramedik.*, unit_kerja.nama as nama_unit FROM paramedik JOIN unit_kerja ON paramedik.unit_kerja_id=unit_kerja.id";
+// Jalanin query
+$getParamedik = $dbh->query($sql);
+
 require_once './layouts/top.php';
 require_once './layouts/navbar.php';
 require_once './layouts/sidebar.php';
-
-require_once './db_koneksi.php';
-
-// Perintah untuk mengambil data dari table pasien
-$sql = 'SELECT * FROM paramedik';
-// Jalanin query
-$getParamedik = $dbh->query($sql);
 
 ?>
 
@@ -48,12 +49,13 @@ $getParamedik = $dbh->query($sql);
             <tr>
               <th>No</th>
               <th>Nama</th>
-              <th>Gender</th>
+              <th>Jenis Kelamin</th>
               <th>Tempat lahir</th>
               <th>Tanggal lahir</th>
               <th>Kategori</th>
               <th>Telpon</th>
               <th>Alamat</th>
+              <th>Unit Kerja</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -68,9 +70,10 @@ $getParamedik = $dbh->query($sql);
                 <td><?= $paramedik['kategori'] ?></td>
                 <td><?= $paramedik['telpon'] ?></td>
                 <td><?= $paramedik['alamat'] ?></td>
+                <td><?= $paramedik['nama_unit'] ?></td>
                 <td>
                   <a href="./form_paramedik.php?id=<?= $paramedik['id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
-                  <form action="proses_paramedik.php" method="post">
+                  <form action="./action/proses_paramedik.php" method="post">
                     <input type="hidden" name="id_pasien" value="<?= $paramedik['id'] ?>">
                     <input type="submit" name="proses" class="btn btn-sm btn-danger" value="Hapus">
                   </form>
